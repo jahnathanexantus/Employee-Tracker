@@ -53,31 +53,58 @@ function mainMenu() {
 			},
 		])
 		.then(function (answer) {
+			console.log(answer.choice);
 			switch (answer.choice) {
-				case "View all employees":
+				case "VIEW_EMPLOYEE":
 					viewEmployees();
 					break;
-				case "View all departments":
+				case "VIEW_DEPARTMENTS":
 					viewDepartments();
 					break;
-				case "View all roles":
+				case "VIEW_ROLES":
 					viewRole();
 					break;
-				case "Add an employee":
+				case "ADD_EMPLOYEE":
 					addEmployee();
 					break;
-				case "Add a department":
+				case "ADD_DEPARTMENT":
 					addDepartment();
 					break;
-				case "Updata an employee role":
+				case "UPDATING_EMPLOYEE ROLE":
 					updatingRole();
 					break;
-				case "EXIT":
-					exitCycle();
-					break;
 				default:
-					break;
+					exitCycle();
 			}
 		});
-}
+};
 mainMenu();
+
+function viewEmployees() {
+	const query = "SELECT * FROM employee";
+	connection.query(query, function (err, res) {
+		if (err) throw err;
+		console.table(res);
+		mainMenu()
+	});
+};
+
+function viewDepartments() {
+	const query = "SELECT * FROM department";
+	connection.query(query, function (err, res) {
+		if (err) throw err;
+		console.table(res);
+		mainMenu()
+	});
+};
+
+function viewRole (){
+	const query = "SELECT * FROM role";
+	connection.query(query,function(err,res){
+		if (err) throw err;
+		console.table(res);
+		mainMenu()
+	})
+};
+
+
