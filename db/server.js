@@ -77,7 +77,7 @@ function mainMenu() {
 					exitCycle();
 			}
 		});
-};
+}
 mainMenu();
 
 function viewEmployees() {
@@ -85,26 +85,109 @@ function viewEmployees() {
 	connection.query(query, function (err, res) {
 		if (err) throw err;
 		console.table(res);
-		mainMenu()
+		mainMenu();
 	});
-};
+}
 
 function viewDepartments() {
 	const query = "SELECT * FROM department";
 	connection.query(query, function (err, res) {
 		if (err) throw err;
 		console.table(res);
-		mainMenu()
+		mainMenu();
 	});
-};
+}
 
-function viewRole (){
+function viewRole() {
 	const query = "SELECT * FROM role";
-	connection.query(query,function(err,res){
+	connection.query(query, function (err, res) {
 		if (err) throw err;
 		console.table(res);
-		mainMenu()
+		mainMenu();
+	});
+}
+
+function addEmployee() {
+	connection.query("SELECT * FROM role", function (err, res) {
+		if (err) throw err;
+		inquirer
+			.prompt([
+				{
+					type: "input",
+					name: "first_name",
+					massage: "What is your first name?",
+				},
+				{
+					type: "input",
+					name: "last_name",
+					massage: "what is your first name",
+				},
+				{
+					type: "list",
+					name: "role_id",
+					massage: "what is your role id",
+					choices: [3, 5, 2, 9],
+				},
+			])
+			.then(function (res) {
+				connection.query(
+					"INSERT INTO employee (first_name,last_name,role_id) VALUES (?,?,?)",
+					[res.first_name, res.last_name, res.role_id],
+					(err, res) => {
+						if (err) throw err;
+						if (res) console.table(res);
+						mainMenu()
+					}
+				);
+			});
+	});
+}
+
+function addDepartment() {
+	inquirer
+	.prompt([
+		{
+			name: 'ADD_DEPARTMENT', 
+			type: 'input', 
+			message: 'Which department would you like to add?'
+		}
+	]).then(function(res){
+		connection.query('INSERT INTO department (name) VALUE (?)', [res.ADD_DEPARTMENT],
+		(err,res)=>{
+			if (err)throw err;
+			if (res)console.table(res);
+			mainMenu()
+		}
+		);
 	})
-};
+}
+	
+			
 
 
+
+
+
+
+
+			// {
+			// 	name: 'ADD_DEPARTMENT', 
+			// 	type: 'input', 
+			// 	message: 'Which department would you like to add?'
+			// }
+			// ]).then(function (answer) {
+			// 	connection.query(
+			// 		'INSERT INTO department (ADD_DEPARTMENT) VALUE (?)',
+			// // 		[
+			// // 		res.ADD_DEPARTMENT
+			// // 	],
+			// // 	 (err,res)=>{
+			// // 		 if (err)throw err;
+			// // 		 if (res) console.log(res);
+			// // 		 }
+				
+				
+			// 		)
+           
+			// 		])
+			// 	})
