@@ -161,7 +161,8 @@ function addDepartment() {
 		);
 	})
 }
-	
+
+
 			
 
 
@@ -170,24 +171,5 @@ function addDepartment() {
 
 
 
-			// {
-			// 	name: 'ADD_DEPARTMENT', 
-			// 	type: 'input', 
-			// 	message: 'Which department would you like to add?'
-			// }
-			// ]).then(function (answer) {
-			// 	connection.query(
-			// 		'INSERT INTO department (ADD_DEPARTMENT) VALUE (?)',
-			// // 		[
-			// // 		res.ADD_DEPARTMENT
-			// // 	],
-			// // 	 (err,res)=>{
-			// // 		 if (err)throw err;
-			// // 		 if (res) console.log(res);
-			// // 		 }
-				
-				
-			// 		)
-           
-			// 		])
-			// 	})
+
+		
